@@ -1,8 +1,8 @@
-const DATA = {
+export const data = {
     profile: {
         name: 'Dan',
         playlist: ['playlist1', 'playlist2', 'playlist3'],
-        img: 'tempHeadshot.jpg',
+        img: 'https://unsplash.com/photos/c_GmwfHBDzk.jpg',
         alt: 'profile picture'
     },
 
@@ -14,7 +14,7 @@ const DATA = {
         },
         {
             artist: 'artist2',
-            songName: ['songName1', 'songName2', 'songName3'],
+            songName: 'songName2',
             duration: '2:30'
         },
         {
@@ -23,7 +23,5 @@ const DATA = {
             duration: '3:30'
         }
     ]
-            
-        
-
 }
+
