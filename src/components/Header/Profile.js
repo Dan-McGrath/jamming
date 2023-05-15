@@ -1,10 +1,10 @@
 import React from "react";
 
 
-function Profile({profile}) {
+function Profile(props) {
     return (
         <div className="profile-img">
-            <img src={profile.img} alt={profile.alt} />
+            <img src={props.profileImg} alt={props.profileAlt}/>
         </div>
     )
 }
