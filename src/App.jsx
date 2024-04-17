@@ -31,7 +31,11 @@ function App() {
   ];
 
   const handleSearchResults = (string) => {
-    setSearchResults(mockArr.filter((element) => element === string));
+    setSearchResults(
+      mockArr.filter((element) =>
+        element.song.toLowerCase().includes(string.toLowerCase()),
+      ),
+    );
   };
 
   return (
@@ -43,7 +47,7 @@ function App() {
       </header>
       <SearchBar onSearch={handleSearchResults} />
       <div className="grid grid-cols-2 w-10/12 mx-auto gap-6 min-h-lvh rounded-md">
-        <SearchResults searchResults={searchResults} />
+        <SearchResults searchResults={searchResults} playlist={playlist} />
         <Playlist playlist={playlist} />
       </div>
     </div>
