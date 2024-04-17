@@ -38,15 +38,19 @@ function App() {
     );
   };
 
+  const handleAddSong = () => {};
+
+  const handleRemoveSong = () => {};
+
   return (
     <div className="min-h-lvh">
-      <header className="text-center mb-2 mx-auto bg-blue-gray py-4">
+      <header className="py-4 mx-auto mb-2 text-center bg-blue-gray">
         <h1 className="text-6xl text-lite-green">
           Ja<span className="text-neutral-300">mmm</span>ing
         </h1>
       </header>
       <SearchBar onSearch={handleSearchResults} />
-      <div className="grid grid-cols-2 w-10/12 mx-auto gap-6 min-h-lvh rounded-md">
+      <div className="grid w-10/12 grid-cols-2 gap-6 mx-auto rounded-md min-h-lvh">
         <SearchResults searchResults={searchResults} playlist={playlist} />
         <Playlist playlist={playlist} />
       </div>
