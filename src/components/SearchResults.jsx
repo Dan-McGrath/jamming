@@ -1,12 +1,12 @@
 import Tracklist from "./Tracklist";
-const SearchResults = ({ searchResults }) => {
+const SearchResults = ({ searchResults, playlist }) => {
   return (
-    <div className="border-dark-green border rounded-md">
-      <h2 className="text-blue text-4xl text-center font-semibold my-4">
+    <div className="border rounded-md border-dark-green">
+      <h2 className="my-4 text-4xl font-semibold text-center text-blue">
         Results
       </h2>
       <div>
-        <Tracklist songs={searchResults} />
+        <Tracklist songs={searchResults} playlist={playlist} />
       </div>
     </div>
   );
