@@ -9,7 +9,7 @@ const SearchBar = ({ onSearch }) => {
 
   return (
     <div className="mx-auto my-5 max-w-fit">
-      <form>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <input
           className="rounded-md px-2 py-2 placeholder:text-dark-green text-blue font-semibold text-lg"
           type="text"
