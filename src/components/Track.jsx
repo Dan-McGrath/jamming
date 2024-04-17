@@ -1,32 +1,32 @@
 const Track = ({ songs, playlist }) => {
   return (
     <>
-      <div className="grid grid-cols-12 items-center py-3">
+      <div className="grid items-center grid-cols-12 py-3">
         {songs &&
           songs.map((song, i) => (
             <>
-              <div key={i} className="col-span-10">
+              <div key={i} className="col-span-10 mb-2 border-b">
                 <div>
-                  <h3 className="text-lite-green text-lg">{song.song}</h3>
+                  <h3 className="text-lg text-lite-green">{song.song}</h3>
                   <p className="text-dark-green/80">{song.artist}</p>
                   <p className="text-dark-green/80">{song.album}</p>
                 </div>
               </div>
               <div className="col-start-11">
-                {playlist.filter(function (obj) {
-                  return Object.keys(obj).some(function (key) {
-                    return obj[key].includes(song);
+                {playlist.filter((obj) => {
+                  Object.keys(obj).some((key) => {
+                    obj[key].includes(song);
                   });
                 }) ? (
                   <>
-                    <button className="rounded-full bg-blue text-lite-green p-1 font-bold">
-                      -
+                    <button className="px-2 text-lg font-semibold rounded-full bg-blue text-lite-green">
+                      +
                     </button>
                   </>
                 ) : (
                   <>
-                    <button className="rounded-full bg-blue text-lite-green p-1 font-bold">
-                      +
+                    <button className="p-2 font-bold rounded-full bg-blue text-lite-green">
+                      -
                     </button>
                   </>
                 )}
@@ -34,7 +34,6 @@ const Track = ({ songs, playlist }) => {
             </>
           ))}
       </div>
-      <hr />
     </>
   );
 };
