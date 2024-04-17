@@ -6,7 +6,7 @@ const SearchResults = ({ searchResults }) => {
         Results
       </h2>
       <div>
-        <Tracklist />
+        <Tracklist songs={searchResults} />
       </div>
     </div>
   );
