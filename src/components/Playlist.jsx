@@ -1,19 +1,23 @@
 import Tracklist from "./Tracklist";
 
-const Playlist = () => {
+const Playlist = ({ playlist, onRemoveSong }) => {
   return (
-    <div className="border-dark-green border rounded-md">
-      <h2 className="text-blue text-4xl text-center font-semibold my-4">
+    <div className="border rounded-md border-dark-green">
+      <h2 className="my-4 text-4xl font-semibold text-center text-blue">
         Playlist
       </h2>
       <input
         type="text"
         placeholder="Playlist Title"
-        className="w-5/6 border-none bg-background text-lite-green text-lg focus-visible:outline-none font-semibold mx-auto block placeholder-dark-green"
+        className="block w-5/6 mx-auto text-lg font-semibold border-none bg-background text-lite-green focus-visible:outline-none placeholder-dark-green"
       />
       <hr className="w-5/6 mx-auto border-white/30" />
-      <Tracklist />
-      <button className="w-1/2 mx-auto bg-blue rounded-md block p-4 text-lite-green font-semibold">
+      <Tracklist
+        songs={playlist}
+        playlist={playlist}
+        onRemoveSong={onRemoveSong}
+      />
+      <button className="block w-1/2 p-4 mx-auto font-semibold rounded-md bg-blue text-lite-green">
         Save to Spotify
       </button>
     </div>
