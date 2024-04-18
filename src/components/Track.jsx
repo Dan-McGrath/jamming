@@ -45,9 +45,3 @@ const Track = ({ songs, playlist, onAddSong, onRemoveSong }) => {
 };
 
 export default Track;
-
-// playlist.filter((obj) => {
-//   Object.keys(obj).some((key) => {
-//     obj[key].includes(song);
-//   });
-// })
