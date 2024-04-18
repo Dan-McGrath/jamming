@@ -38,9 +38,15 @@ function App() {
     );
   };
 
-  const handleAddSong = () => {};
+  const handleAddSong = (e) => {
+    let value = mockArr.filter((ele) => ele.song === e.target.value);
+    setPlaylist((current) => [...current, value[0]]);
+  };
 
-  const handleRemoveSong = () => {};
+  const handleRemoveSong = (e) => {
+    let value = playlist.filter((ele) => ele.song != e.target.value);
+    setPlaylist(value);
+  };
 
   return (
     <div className="min-h-lvh">
@@ -51,8 +57,13 @@ function App() {
       </header>
       <SearchBar onSearch={handleSearchResults} />
       <div className="grid w-10/12 grid-cols-2 gap-6 mx-auto rounded-md min-h-lvh">
-        <SearchResults searchResults={searchResults} playlist={playlist} />
-        <Playlist playlist={playlist} />
+        <SearchResults
+          searchResults={searchResults}
+          playlist={playlist}
+          onAddSong={handleAddSong}
+          onRemoveSong={handleRemoveSong}
+        />
+        <Playlist playlist={playlist} onRemoveSong={handleRemoveSong} />
       </div>
     </div>
   );
