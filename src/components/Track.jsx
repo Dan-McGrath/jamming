@@ -1,11 +1,11 @@
-const Track = ({ songs, playlist }) => {
+const Track = ({ songs, playlist, onAddSong, onRemoveSong }) => {
   return (
     <>
-      <div className="grid items-center grid-cols-12 py-3">
-        {songs &&
-          songs.map((song, i) => (
-            <>
-              <div key={i} className="col-span-10 mb-2 border-b">
+      {songs &&
+        songs.map((song, i) => (
+          <>
+            <div key={i} className="grid items-center grid-cols-12 py-3">
+              <div className="col-span-10 mb-2">
                 <div>
                   <h3 className="text-lg text-lite-green">{song.song}</h3>
                   <p className="text-dark-green/80">{song.artist}</p>
@@ -13,29 +13,41 @@ const Track = ({ songs, playlist }) => {
                 </div>
               </div>
               <div className="col-start-11">
-                {playlist.filter((obj) => {
-                  Object.keys(obj).some((key) => {
-                    obj[key].includes(song);
-                  });
-                }) ? (
+                {playlist.findIndex((track) => track.song === song.song) >
+                -1 ? (
                   <>
-                    <button className="px-2 text-lg font-semibold rounded-full bg-blue text-lite-green">
-                      +
+                    <button
+                      value={song.song}
+                      onClick={(e) => onRemoveSong(e)}
+                      className="px-2 text-lg font-semibold rounded-full bg-blue text-lite-green"
+                    >
+                      -
                     </button>
                   </>
                 ) : (
                   <>
-                    <button className="p-2 font-bold rounded-full bg-blue text-lite-green">
-                      -
+                    <button
+                      value={song.song}
+                      onClick={(e) => onAddSong(e)}
+                      className="p-2 font-bold rounded-full bg-blue text-lite-green"
+                    >
+                      +
                     </button>
                   </>
                 )}
               </div>
-            </>
-          ))}
-      </div>
+            </div>
+            <hr />
+          </>
+        ))}
     </>
   );
 };
 
 export default Track;
+
+// playlist.filter((obj) => {
+//   Object.keys(obj).some((key) => {
+//     obj[key].includes(song);
+//   });
+// })
