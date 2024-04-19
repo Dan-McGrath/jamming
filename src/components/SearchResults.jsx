@@ -6,7 +6,7 @@ const SearchResults = ({
   onRemoveSong,
 }) => {
   return (
-    <div className="border rounded-md border-dark-green">
+    <div className="border-4 rounded-md border-dark-green">
       <h2 className="my-4 text-4xl font-semibold text-center text-blue">
         Results
       </h2>
