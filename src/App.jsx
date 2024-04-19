@@ -65,10 +65,12 @@ function App() {
 
   useEffect(() => {
     getParams();
-  }, []);
+    if (params["#access_token"]) setLogin(true);
+  }, [params]);
 
   const handleLogout = () => {
-    removeItem();
+    setParams({});
+    window.location.replace("http://localhost:5173");
   };
 
   const handleSearchResults = (string) => {
@@ -82,6 +84,7 @@ function App() {
   const handleAddSong = (e) => {
     let value = mockArr.filter((ele) => ele.song === e.target.value);
     setPlaylist((current) => [...current, value[0]]);
+    console.log(params["#access_token"]);
   };
 
   const handleRemoveSong = (e) => {
@@ -96,16 +99,21 @@ function App() {
           Ja<span className="text-neutral-300">mmm</span>ing
         </h1>
       </header>
-      <button onClick={getParams}>Params</button>
       {login ? (
         <>
-          <button onClick={getParams()} className="text-light-green">
+          <button
+            onClick={handleLogout}
+            className="float-right px-2 py-1 mx-4 rounded-md text-lite-green bg-blue"
+          >
             Logout
           </button>
         </>
       ) : (
         <>
-          <button onClick={handleLogin} className="text-light-green">
+          <button
+            onClick={handleLogin}
+            className="float-right px-2 py-1 mx-4 rounded-md text-lite-green bg-blue"
+          >
             Login
           </button>
         </>
