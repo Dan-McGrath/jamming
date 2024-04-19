@@ -1,11 +1,13 @@
 import Playlist from "./components/Playlist";
 import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [playlist, setPlaylist] = useState([]);
-
+  const [spotifyData, setSpotifyData] = useState({});
+  const [login, setLogin] = useState(false);
+  const [params, setParams] = useState({});
   // Mock Arr
   const mockArr = [
     {
@@ -29,6 +31,45 @@ function App() {
       album: "Album 1",
     },
   ];
+
+  const getParams = () => {
+    let params = {};
+    const url = window.location.hash;
+    const searchParams = new URLSearchParams(url);
+    for (const [key, value] of searchParams.entries()) {
+      params[key] = value;
+    }
+    setParams(params);
+  };
+
+  const handleLogin = () => {
+    const clientID = "7aa5c99f0a0341d9aef00ce13cd72e51";
+    const redirectUri = "http://localhost:5173/";
+    const state = window.crypto.randomUUID();
+    localStorage.setItem("stateKey", state);
+    const scope = "playlist-modify-public";
+    let url = "https://accounts.spotify.com/authorize";
+    url +=
+      "?response_type=token" +
+      "&client_id=" +
+      encodeURIComponent(clientID) +
+      "&scope=" +
+      encodeURIComponent(scope) +
+      "&redirect_uri=" +
+      encodeURIComponent(redirectUri) +
+      "&state=" +
+      encodeURIComponent(state);
+
+    window.location = url;
+  };
+
+  useEffect(() => {
+    getParams();
+  }, []);
+
+  const handleLogout = () => {
+    removeItem();
+  };
 
   const handleSearchResults = (string) => {
     setSearchResults(
@@ -55,6 +96,21 @@ function App() {
           Ja<span className="text-neutral-300">mmm</span>ing
         </h1>
       </header>
+      <button onClick={getParams}>Params</button>
+      {login ? (
+        <>
+          <button onClick={getParams()} className="text-light-green">
+            Logout
+          </button>
+        </>
+      ) : (
+        <>
+          <button onClick={handleLogin} className="text-light-green">
+            Login
+          </button>
+        </>
+      )}
+
       <SearchBar onSearch={handleSearchResults} />
       <div className="grid w-10/12 grid-cols-2 gap-6 mx-auto rounded-md min-h-lvh">
         <SearchResults
