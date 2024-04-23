@@ -11,7 +11,7 @@ const SearchBar = ({ onSearch }) => {
     <div className="mx-auto my-5 max-w-fit">
       <form onSubmit={(e) => handleSubmit(e)}>
         <input
-          className="rounded-md px-2 py-2 placeholder:text-dark-green text-blue font-semibold text-lg"
+          className="px-2 py-2 text-lg font-semibold rounded-md placeholder:text-dark-green text-blue"
           type="text"
           name="search"
           placeholder="Search for songs"
@@ -20,7 +20,7 @@ const SearchBar = ({ onSearch }) => {
         />
         <button
           type="submit"
-          className="text-lite-green mx-5 rounded-xl bg-blue px-6 py-2 hover:bg-lite-green/80 hover:text-blue-gray hover:font-semibold text-lg"
+          className="px-6 py-2 mx-5 text-lg text-lite-green rounded-xl bg-blue hover:bg-lite-green/80 hover:text-blue-gray hover:font-semibold"
         >
           Search
         </button>
