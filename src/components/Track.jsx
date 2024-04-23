@@ -2,14 +2,20 @@ const Track = ({ songs, playlist, onAddSong, onRemoveSong }) => {
   return (
     <>
       {songs &&
-        songs.map((song, i) => (
-          <>
-            <div key={i} className="grid items-center grid-cols-12 py-3">
+        songs.map((song) => (
+          <div key={song.id}>
+            <div className="grid items-center grid-cols-12 py-3">
               <div className="col-span-10 mb-2">
                 <div>
-                  <h3 className="text-lg text-lite-green">{song.song}</h3>
-                  <p className="text-dark-green/80">{song.artist}</p>
-                  <p className="text-dark-green/80">{song.album}</p>
+                  <h3 className="text-lg text-lite-green">{song.name}</h3>
+                  <div className="text-dark-green/80">
+                    {song.artists.map((artist, i) => (
+                      <>
+                        <p key={i}>{artist.name}</p>
+                      </>
+                    ))}
+                  </div>
+                  <p className="text-dark-green/80">{song.album.name}</p>
                 </div>
               </div>
               <div className="col-start-11">
@@ -38,7 +44,7 @@ const Track = ({ songs, playlist, onAddSong, onRemoveSong }) => {
               </div>
             </div>
             <hr />
-          </>
+          </div>
         ))}
     </>
   );
