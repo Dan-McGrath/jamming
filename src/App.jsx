@@ -5,32 +5,9 @@ import { useState, useEffect } from "react";
 function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [playlist, setPlaylist] = useState([]);
-  const [spotifyData, setSpotifyData] = useState({});
+  const [spotifyData, setSpotifyData] = useState([]);
   const [login, setLogin] = useState(false);
   const [params, setParams] = useState({});
-  // Mock Arr
-  const mockArr = [
-    {
-      song: "Song 1",
-      artist: "Artist 1",
-      album: "Album 1",
-    },
-    {
-      song: "Song 2",
-      artist: "Artist 2",
-      album: "Album 3",
-    },
-    {
-      song: "Song 3",
-      artist: "Artist 1",
-      album: "Album 2",
-    },
-    {
-      song: "Song 4",
-      artist: "Artist 3",
-      album: "Album 1",
-    },
-  ];
 
   const getParams = () => {
     let params = {};
@@ -39,7 +16,7 @@ function App() {
     for (const [key, value] of searchParams.entries()) {
       params[key] = value;
     }
-    setParams(params);
+    return params;
   };
 
   const handleLogin = () => {
@@ -64,21 +41,37 @@ function App() {
   };
 
   useEffect(() => {
-    getParams();
-    if (params["#access_token"]) setLogin(true);
-  }, [params]);
+    const params = getParams();
+    if (params["#access_token"]) {
+      setParams(params);
+      setLogin(true);
+    }
+  }, []);
 
   const handleLogout = () => {
     setParams({});
     window.location.replace("http://localhost:5173");
   };
 
-  const handleSearchResults = (string) => {
-    setSearchResults(
-      mockArr.filter((element) =>
-        element.song.toLowerCase().includes(string.toLowerCase()),
-      ),
+  const handleSearchResults = async (string) => {
+    const endpoint = "https://api.spotify.com/v1/search?";
+    const response = await fetch(
+      `${endpoint}q=${string}&type=track&market=US`,
+      {
+        headers: {
+          Authorization: `Bearer ${params["#access_token"]}`,
+        },
+      },
     );
+    const tracks = await response.json();
+    let tracksArr = Object.entries(tracks.tracks.items).map((e) => e[1]);
+    let unique = [];
+    tracksArr.forEach((ele) => {
+      if (!unique.includes(ele.id)) {
+        unique.push(ele);
+      }
+    });
+    setSpotifyData(unique);
   };
 
   const handleAddSong = (e) => {
@@ -122,7 +115,7 @@ function App() {
       <SearchBar onSearch={handleSearchResults} />
       <div className="grid w-10/12 grid-cols-2 gap-6 mx-auto rounded-md min-h-lvh">
         <SearchResults
-          searchResults={searchResults}
+          searchResults={spotifyData}
           playlist={playlist}
           onAddSong={handleAddSong}
           onRemoveSong={handleRemoveSong}
