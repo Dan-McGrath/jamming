@@ -2,12 +2,13 @@ import Playlist from "./components/Playlist";
 import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import { useState, useEffect } from "react";
+
 function App() {
-  const [searchResults, setSearchResults] = useState([]);
   const [playlist, setPlaylist] = useState([]);
   const [spotifyData, setSpotifyData] = useState([]);
   const [login, setLogin] = useState(false);
   const [params, setParams] = useState({});
+  const [userInfo, setUserInfo] = useState({});
 
   const getParams = () => {
     let params = {};
@@ -24,7 +25,7 @@ function App() {
     const redirectUri = "http://localhost:5173/";
     const state = window.crypto.randomUUID();
     localStorage.setItem("stateKey", state);
-    const scope = "playlist-modify-public";
+    const scope = "playlist-modify-public user-read-private";
     let url = "https://accounts.spotify.com/authorize";
     url +=
       "?response_type=token" +
@@ -47,6 +48,23 @@ function App() {
       setLogin(true);
     }
   }, []);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const endpoint = "https://api.spotify.com/v1/me";
+      if (params["#access_token"]) {
+        const response = await fetch(`${endpoint}`, {
+          headers: {
+            Authorization: `Bearer ${params["#access_token"]}`,
+          },
+        });
+        const userData = await response.json();
+        setUserInfo(userData);
+      }
+    };
+
+    fetchUserInfo();
+  }, [params]);
 
   const handleLogout = () => {
     setParams({});
