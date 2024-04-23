@@ -75,13 +75,14 @@ function App() {
   };
 
   const handleAddSong = (e) => {
-    let value = mockArr.filter((ele) => ele.song === e.target.value);
-    setPlaylist((current) => [...current, value[0]]);
-    console.log(params["#access_token"]);
+    console.log(e.target.value);
+    let value = spotifyData.findIndex((ele) => ele.name === e.target.value);
+    console.log(value);
+    setPlaylist((current) => [...current, spotifyData[value]]);
   };
 
   const handleRemoveSong = (e) => {
-    let value = playlist.filter((ele) => ele.song != e.target.value);
+    let value = playlist.filter((ele) => ele.name != e.target.value);
     setPlaylist(value);
   };
 
