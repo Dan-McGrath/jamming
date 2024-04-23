@@ -19,11 +19,11 @@ const Track = ({ songs, playlist, onAddSong, onRemoveSong }) => {
                 </div>
               </div>
               <div className="col-start-11">
-                {playlist.findIndex((track) => track.song === song.song) >
+                {playlist.findIndex((track) => track.name === song.name) >
                 -1 ? (
                   <>
                     <button
-                      value={song.song}
+                      value={song.name}
                       onClick={(e) => onRemoveSong(e)}
                       className="px-2 text-lg font-semibold rounded-full bg-blue text-lite-green"
                     >
@@ -33,7 +33,7 @@ const Track = ({ songs, playlist, onAddSong, onRemoveSong }) => {
                 ) : (
                   <>
                     <button
-                      value={song.song}
+                      value={song.name}
                       onClick={(e) => onAddSong(e)}
                       className="p-2 font-bold rounded-full bg-blue text-lite-green"
                     >
