@@ -22,7 +22,7 @@ function App() {
 
   const handleLogin = () => {
     const clientID = "7aa5c99f0a0341d9aef00ce13cd72e51";
-    const redirectUri = "http://localhost:5173/";
+    const redirectUri = "https://dan-mcgrath.github.io/jamming/";
     const state = window.crypto.randomUUID();
     localStorage.setItem("stateKey", state);
     const scope =
@@ -69,7 +69,7 @@ function App() {
 
   const handleLogout = () => {
     setParams({});
-    window.location.replace("http://localhost:5173");
+    window.location.replace("https://dan-mcgrath.github.io/jamming/");
   };
 
   const handleSearchResults = async (string) => {
