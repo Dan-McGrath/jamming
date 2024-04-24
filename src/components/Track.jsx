@@ -1,12 +1,12 @@
 const Track = ({ songs, playlist, onAddSong, onRemoveSong }) => {
+  const handleClick = () => {};
+
   return (
     <>
       {songs &&
         songs.map((song) => (
           <div key={song.id}>
-            <audio controls>
-              <source src={song.href} />
-            </audio>
+            <button>Play</button>
             <div className="grid items-center grid-cols-12 py-3">
               <div className="col-span-10 mb-2">
                 <div>
