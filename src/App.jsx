@@ -26,7 +26,7 @@ function App() {
     const state = window.crypto.randomUUID();
     localStorage.setItem("stateKey", state);
     const scope =
-      "playlist-modify-public user-read-private playlist-modify-private";
+      "playlist-modify-public user-read-private playlist-modify-private user-modify-playback-state user-read-playback-state";
     let url = "https://accounts.spotify.com/authorize";
     url +=
       "?response_type=token" +
