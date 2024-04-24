@@ -1,7 +1,13 @@
 import Tracklist from "./Tracklist";
 import { useState } from "react";
 
-const Playlist = ({ playlist, onRemoveSong, userId, accessToken }) => {
+const Playlist = ({
+  playlist,
+  onRemoveSong,
+  userId,
+  accessToken,
+  handlePlaylist,
+}) => {
   const [input, setInput] = useState("");
 
   const createPlaylist = async () => {
@@ -48,6 +54,10 @@ const Playlist = ({ playlist, onRemoveSong, userId, accessToken }) => {
         body: JSON.stringify(trackUris),
       },
     );
+    if (response.ok) {
+      setInput("");
+      handlePlaylist([]);
+    }
     return response;
   };
 
