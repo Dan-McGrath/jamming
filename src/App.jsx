@@ -25,7 +25,8 @@ function App() {
     const redirectUri = "http://localhost:5173/";
     const state = window.crypto.randomUUID();
     localStorage.setItem("stateKey", state);
-    const scope = "playlist-modify-public user-read-private";
+    const scope =
+      "playlist-modify-public user-read-private playlist-modify-private";
     let url = "https://accounts.spotify.com/authorize";
     url +=
       "?response_type=token" +
@@ -93,9 +94,7 @@ function App() {
   };
 
   const handleAddSong = (e) => {
-    console.log(e.target.value);
     let value = spotifyData.findIndex((ele) => ele.name === e.target.value);
-    console.log(value);
     setPlaylist((current) => [...current, spotifyData[value]]);
   };
 
@@ -139,7 +138,12 @@ function App() {
           onAddSong={handleAddSong}
           onRemoveSong={handleRemoveSong}
         />
-        <Playlist playlist={playlist} onRemoveSong={handleRemoveSong} />
+        <Playlist
+          playlist={playlist}
+          onRemoveSong={handleRemoveSong}
+          userId={userInfo.id}
+          accessToken={params["#access_token"]}
+        />
       </div>
     </div>
   );
