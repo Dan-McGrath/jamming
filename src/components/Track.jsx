@@ -1,14 +1,23 @@
-const Track = ({ songs, playlist, onAddSong, onRemoveSong }) => {
-  const handleClick = () => {};
+const Track = ({ songs, playlist, onAddSong, onRemoveSong, accesssToken }) => {
+  const handlePlaySong = async (e) => {
+    await fetch("https://api.spotify.com/v1/me/player/play", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accesssToken}`,
+      },
+      body: { context_uri: e.target.value },
+    });
+    return;
+  };
 
   return (
     <>
       {songs &&
         songs.map((song) => (
           <div key={song.id}>
-            <button>Play</button>
             <div className="grid items-center grid-cols-12 py-3">
-              <div className="col-span-10 mb-2">
+              <div className="col-span-6 mb-2">
                 <div>
                   <h3 className="text-lg text-lite-green">{song.name}</h3>
                   <div className="text-dark-green/80">
@@ -21,6 +30,13 @@ const Track = ({ songs, playlist, onAddSong, onRemoveSong }) => {
                   <p className="text-dark-green/80">{song.album.name}</p>
                 </div>
               </div>
+              <button
+                value={song.uri}
+                className="bg-lite-green"
+                onClick={(e) => handlePlaySong(e)}
+              >
+                Play
+              </button>
               <div className="col-start-11">
                 {playlist.findIndex((track) => track.name === song.name) >
                 -1 ? (
