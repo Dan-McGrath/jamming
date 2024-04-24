@@ -30,13 +30,6 @@ const Track = ({ songs, playlist, onAddSong, onRemoveSong, accesssToken }) => {
                   <p className="text-dark-green/80">{song.album.name}</p>
                 </div>
               </div>
-              <button
-                value={song.uri}
-                className="bg-lite-green"
-                onClick={(e) => handlePlaySong(e)}
-              >
-                Play
-              </button>
               <div className="col-start-11">
                 {playlist.findIndex((track) => track.name === song.name) >
                 -1 ? (
