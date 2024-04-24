@@ -141,6 +141,7 @@ function App() {
         />
         <Playlist
           playlist={playlist}
+          handlePlaylist={setPlaylist}
           onRemoveSong={handleRemoveSong}
           userId={userInfo.id}
           accessToken={params["#access_token"]}
