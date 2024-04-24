@@ -4,6 +4,7 @@ const SearchResults = ({
   playlist,
   onAddSong,
   onRemoveSong,
+  accessToken,
 }) => {
   return (
     <div className="border-4 rounded-md border-dark-green">
@@ -16,6 +17,7 @@ const SearchResults = ({
           playlist={playlist}
           onAddSong={onAddSong}
           onRemoveSong={onRemoveSong}
+          accessToken={accessToken}
         />
       </div>
     </div>

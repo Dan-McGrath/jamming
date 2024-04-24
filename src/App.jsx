@@ -137,6 +137,7 @@ function App() {
           playlist={playlist}
           onAddSong={handleAddSong}
           onRemoveSong={handleRemoveSong}
+          accessToken={params["#access_token"]}
         />
         <Playlist
           playlist={playlist}

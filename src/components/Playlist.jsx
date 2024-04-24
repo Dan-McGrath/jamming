@@ -77,6 +77,7 @@ const Playlist = ({ playlist, onRemoveSong, userId, accessToken }) => {
           songs={playlist}
           playlist={playlist}
           onRemoveSong={onRemoveSong}
+          accessToken={accessToken}
         />
         <button className="block w-1/2 p-4 mx-auto font-semibold rounded-md bg-blue text-lite-green">
           Save to Spotify

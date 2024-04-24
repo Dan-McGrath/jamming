@@ -1,5 +1,12 @@
 import Track from "./Track";
-const Tracklist = ({ songs, playlist, onAddSong, onRemoveSong }) => {
+
+const Tracklist = ({
+  songs,
+  playlist,
+  onAddSong,
+  onRemoveSong,
+  accessToken,
+}) => {
   return (
     <div className="mx-3 my-4">
       <Track
@@ -7,6 +14,7 @@ const Tracklist = ({ songs, playlist, onAddSong, onRemoveSong }) => {
         playlist={playlist}
         onAddSong={onAddSong}
         onRemoveSong={onRemoveSong}
+        accessToken={accessToken}
       />
     </div>
   );
